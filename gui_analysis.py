@@ -32,7 +32,6 @@ class WordTable(ct.CTkFrame):
         self.table = ttk.Treeview(self, columns=('Word', 'Frequency'), displaycolumns='#all',
                                   selectmode='none', show='headings')
 
-        self.table.insert('', 'end', 'widgets', text='Widget Tour', values=('sadness', 3), tags='ttk')
         self.table.tag_configure('ttk', font=('Helvetica', 20, 'bold'), foreground='gray74', background='#343638')
 
         # makes the headings appear
@@ -58,11 +57,15 @@ class WordTable(ct.CTkFrame):
         self.load_words()
         
     def load_words(self):
-        print("this ran 1")
-        print((model.word_freq), type(model.word_freq))
-        for key in model.word_freq:
-            print("this ran")
-            print(key, type(key))
+        # sorts it by value
+        temp = []
+        for key, value in model.word_freq.items():
+            temp.append((key, value))
+
+        temp.sort(reverse=True, key=lambda x: x[1])
+
+        for key, value in temp:
+            self.table.insert('', 'end', text='Widget Tour', values=(key, value), tags='ttk')
 
 
 class Definition(ct.CTkFrame):
