@@ -10,13 +10,18 @@ class AnalysisTab(ct.CTkFrame):
         Definition(self).grid(row=0, column=1, sticky='news')
         Export(self).grid(row=1, column=1, sticky='news')
 
+        self.rowconfigure(0, weight=1)
+        self.rowconfigure(1, weight=1)
+        self.columnconfigure(0, weight=1)
+        self.columnconfigure(1, weight=1)
+
 
 # This is the table on the left side
 class WordTable(ct.CTkFrame):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
 
-        self.table = ttk.Treeview(self, columns=('Word', 'Frequency', 'Definition'), displaycolumns='#all',
+        self.table = ttk.Treeview(self, columns=('Word', 'Frequency'), displaycolumns='#all',
                                   selectmode='none')
 
         self.scroll_x = ct.CTkScrollbar(self, orientation="horizontal", command=self.table.xview)
@@ -27,6 +32,9 @@ class WordTable(ct.CTkFrame):
         self.scroll_y.grid(row=0, column=1, sticky="ns")
         self.table.grid(row=0, column=0, sticky='news')
 
+        self.rowconfigure(0, weight=1)
+        self.columnconfigure(0, weight=1)
+
 
 class Definition(ct.CTkFrame):
     def __init__(self, *args, **kwargs):
@@ -35,7 +43,13 @@ class Definition(ct.CTkFrame):
         self.definition = ct.CTkTextbox(self, wrap='word')
 
         ct.CTkLabel(self, text='Definition').grid(row=0, column=0)
-        self.definition.grid(row=1, column=0, sticky='news')
+        self.definition.grid(row=1, column=0, sticky='news', padx=10)
+
+        self.rowconfigure(0, weight=1)
+        self.rowconfigure(1, weight=1)
+        self.columnconfigure(0, weight=1)
+
+
 
 
 # This is the stuff on the right side
@@ -52,6 +66,14 @@ class Export(ct.CTkFrame):
         ct.CTkLabel(self, text='and').grid(row=1, column=1)
         self.max_freq.grid(row=1, column=2, sticky='ew', padx=(10, 30))
         self.export_button.grid(row=10, column=0, columnspan=3, pady=(30, 10))
+
+        # side note: i hate code. jk i mean i love code
+        self.rowconfigure(0, weight=1)
+        self.rowconfigure(1, weight=1)
+        self.rowconfigure(10, weight=1)
+        self.columnconfigure(0, weight=1)
+        self.columnconfigure(1, weight=1)
+        self.columnconfigure(2, weight=1)
 
 
 if __name__ == '__main__':
