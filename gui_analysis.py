@@ -21,9 +21,18 @@ class WordTable(ct.CTkFrame):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
 
-        self.table = ttk.Treeview(self, columns=('Word', 'Frequency'), displaycolumns='#all',
-                                  selectmode='none')
+        style = ttk.Style()
 
+        style.configure('Treeview', fieldbackground='#343638', rowheight=40)
+        style.configure('Treeview.Heading', background="#343638", foreground='gray', font=('Helvetica', 20, 'bold'),
+                        fieldbackground='#343638')
+
+        self.table = ttk.Treeview(self, columns=('Word', 'Frequency'), displaycolumns='#all',
+                                  selectmode='none', show='headings')
+
+        self.table.insert('', 'end', 'widgets', text='Widget Tour')
+
+        # scrollbars
         self.scroll_x = ct.CTkScrollbar(self, orientation="horizontal", command=self.table.xview)
         self.scroll_y = ct.CTkScrollbar(self, orientation="vertical", command=self.table.yview)
         self.table.configure(xscrollcommand=self.scroll_x.set, yscrollcommand=self.scroll_y.set)
