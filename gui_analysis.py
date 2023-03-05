@@ -89,10 +89,13 @@ class Export(ct.CTkFrame):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
 
+
+
         self.min_freq = ct.CTkEntry(self, placeholder_text='0', width=5)
         self.max_freq = ct.CTkEntry(self, placeholder_text='10', width=5)
+
         self.export_button = ct.CTkButton(self, text='Export', fg_color='medium orchid', border_color='purple1',
-                                          hover_color='dark orchid')
+                                          hover_color='dark orchid', command=self.export)
 
         ct.CTkLabel(self, text='Export words with a frequency between').grid(row=0, column=0, columnspan=3, padx=20,
                                                                              pady=(20, 10))
@@ -110,6 +113,18 @@ class Export(ct.CTkFrame):
         self.columnconfigure(2, weight=1)
 
         self.configure(fg_color='thistle1')
+        self.add_vars()
+
+    def add_vars(self):
+        self.min_freq.var = tk.StringVar(value=0)
+        self.min_freq.configure(textvariable=self.min_freq.var)
+        self.max_freq.var = tk.StringVar(value=5)
+        self.max_freq.configure(textvariable=self.max_freq.var)
+
+    def export(self):
+        min_value = int(self.min_freq.var.get())
+        max_value = int(self.max_freq.var.get())
+        model.get_freq_range(min_value, max_value)
 
 
 if __name__ == '__main__':
