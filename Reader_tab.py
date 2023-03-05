@@ -17,6 +17,8 @@ class ReaderTab(ct.CTkFrame):
 
         self.word = Word(self)
         self.word.grid(row=0, column=1, sticky='news', padx=10, pady=10)
+        self.configure(fg_color='thistle1')
+
 
 
 # The left side
@@ -32,6 +34,8 @@ class TextRead(ct.CTkFrame):
 
         self.text.insert("0.0", "first words to be inputted ")
         self.text.insert("end", "second words to be inputted")
+        self.configure(fg_color='thistle1')
+
 
 # The right side
 class Word(ct.CTkFrame):
@@ -43,12 +47,14 @@ class Word(ct.CTkFrame):
         self.columnconfigure(0, weight=1)
 
         self.word = tk.StringVar(value='word')
-        self.word_label = ct.CTkLabel(self, textvariable=self.word, font=('arial', 25))
+        self.word_label = ct.CTkLabel(self, textvariable=self.word, font=('arial', 25), text_color='dark orchid')
         self.definition = ct.CTkTextbox(self, wrap='word')
 
 
         self.word_label.grid(row=0, column=0, padx=10, pady=10)
         self.definition.grid(row=1, column=0, sticky='news', padx=10, pady=10)
+        self.configure(fg_color='thistle1')
+
 
 
 if __name__ == "__main__":
