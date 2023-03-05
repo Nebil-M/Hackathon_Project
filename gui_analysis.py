@@ -75,7 +75,7 @@ class Definition(ct.CTkFrame):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
 
-        self.definition = ct.CTkTextbox(self, wrap='word', cursor='')
+        self.definition = ct.CTkTextbox(self, wrap='word', cursor='', state="disabled")
 
         ct.CTkLabel(self, text='Definition', font=('Arial', 24)).grid(row=0, column=0)
         self.definition.grid(row=1, column=0, sticky='news', padx=10)

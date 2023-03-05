@@ -56,14 +56,19 @@ class Controller:
     def table_select(self):
         selected_item = self.word_table.table.focus()
         word = self.word_table.table.item(selected_item)['values'][0]
+
+        self.definition2.configure(state="normal")
         self.definition2.delete("0.0", 'end')
         self.definition2.insert("0.0", model.get_definition(word))
+        self.definition2.configure(state="disabled")
 
     def update(self, word):
         self.word.set(word)
 
+        self.definition.configure(state="normal")
         self.definition.delete("0.0", 'end')
         self.definition.insert("0.0", model.get_definition(word))
+        self.definition.configure(state="disabled")
 
         model.save()
         self.word_table.load_words()
@@ -117,6 +122,7 @@ class App(ct.CTkFrame):
 
 if __name__ == '__main__':
     window = ct.CTk()
+    window.geometry("1000x550")
     ct.set_appearance_mode("dark")
     ct.set_default_color_theme("dark-blue")
     app = App(window)

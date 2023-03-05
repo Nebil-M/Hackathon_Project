@@ -33,8 +33,6 @@ class TextRead(ct.CTkFrame):
         self.text = ct.CTkTextbox(self, wrap='word')
         self.text.grid(row=0, column=0, sticky='news')
 
-        self.text.insert("0.0", "first words to be inputted ")
-        self.text.insert("end", "second words to be inputted")
         # self.configure(fg_color='thistle1')
 
 
@@ -50,7 +48,7 @@ class Word(ct.CTkFrame):
 
         self.word = tk.StringVar(value='word')
         self.word_label = ct.CTkLabel(self, textvariable=self.word, font=('arial', 25), text_color='dark orchid')
-        self.definition = ct.CTkTextbox(self, wrap='word', cursor='')
+        self.definition = ct.CTkTextbox(self, wrap='word', cursor='', state="disabled")
         self.import_button = ct.CTkButton(self, text="Import", fg_color='medium orchid', border_color='purple1',
                                           hover_color='dark orchid', text_color='white', font=('Arial', 24))
 
