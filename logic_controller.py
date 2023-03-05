@@ -35,18 +35,18 @@ class Model:
             return s
 
     def save(self):
-        y = json.dumps(self.word_freq)
         with open("word_freq.json", "w") as outfile:
-            json.dump(y, outfile)
+            json.dump(self.word_freq, outfile)
 
     def load(self):
         with open('word_freq.json') as user_file:
-            file_contents = user_file.read()
-
-        self.word_freq = json.loads(file_contents)
+            json_object = json.load(user_file)
+        self.word_freq = json_object
 
 
 model = Model()
 if __name__ == '__main__':
     m = Model()
-    print(m.get_definition('hell'))
+    print(m.word_freq)
+    print(type((m.word_freq)))
+    #print(m.get_definition('hell'))
