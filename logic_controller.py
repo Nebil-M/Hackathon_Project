@@ -1,10 +1,10 @@
 import requests
 import json
 
+
 class Model:
     def __init__(self):
         self.word_freq = {}
-
 
     def add_freq(self, word):
         if word in self.word_freq.keys():
@@ -45,20 +45,8 @@ class Model:
         self.word_freq = json.loads(file_contents)
 
 
+model = Model()
 if __name__ == '__main__':
     m = Model()
     m.load()
     print(m.get_definition('hell'))
-
-
-
-
-
-
-
-
-
-
-
-
-

@@ -3,7 +3,7 @@ from tkinter import ttk
 import tkinter as tk
 from Reader_tab import ReaderTab
 from gui_analysis import AnalysisTab
-
+from logic_controller import Model
 
 def limited_weight_cells(parent):
     for child in parent.winfo_children():
@@ -15,7 +15,19 @@ def limited_weight_cells(parent):
 
 
 class Controller:
-    def __init__(self):
+    def __init__(self, view, model):
+        self.text = view.reader.text_field.text
+        self.word = view.reader.text_field.word
+        self.definition = view.reader.text_field.definition
+
+    def bindings(self):
+        # vituals
+        pass
+
+    def select_word(self):
+        pass
+
+    def update(self):
         pass
 
 
