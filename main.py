@@ -121,6 +121,7 @@ if __name__ == '__main__':
     #ct.set_appearance_mode("dark")
     #ct.set_default_color_theme("dark-blue")
     app = App(window)
+    window.title('Language Learning Assistant')
     app.grid(row=0, column=0, sticky='news')
     window.rowconfigure(0, weight=1)
     window.columnconfigure(0, weight=1)

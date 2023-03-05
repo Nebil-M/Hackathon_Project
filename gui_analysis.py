@@ -127,7 +127,8 @@ class Export(ct.CTkFrame):
         min_value = int(self.min_freq.var.get())
         max_value = int(self.max_freq.var.get())
         model.get_freq_range(min_value, max_value)
-
+        # label that says export created
+        tk.messagebox.showinfo(message='Export successfully created! Please open the export.txt file to access it.', title='Export created')
 
 if __name__ == '__main__':
     window = ct.CTk()
