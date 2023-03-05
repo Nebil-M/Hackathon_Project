@@ -69,9 +69,9 @@ class App(ct.CTkFrame):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.reader_button = ct.CTkButton(self, text='Reader', command=lambda: self.switch('reader'), fg_color='medium orchid', border_color='purple1',
-                                          hover_color='dark orchid', text_color='white')
+                                          hover_color='dark orchid', text_color='white', font=('Arial', 24))
         self.analysis_button = ct.CTkButton(self, text='Analysis', command=lambda: self.switch('analysis'), fg_color='medium orchid', border_color='purple1',
-                                          hover_color='dark orchid', text_color='white')
+                                          hover_color='dark orchid', text_color='white', font=('Arial', 24))
 
         self.reader_button.grid(row=0, column=0, sticky='news', padx=50, pady=10)
         self.analysis_button.grid(row=0, column=1, sticky='news', padx=50, pady=10)

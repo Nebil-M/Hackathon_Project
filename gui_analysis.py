@@ -68,16 +68,16 @@ class WordTable(ct.CTkFrame):
         temp.sort(reverse=True, key=lambda x: x[1])
         self.table.delete(*self.table.get_children())
         for key, value in temp:
-            self.table.insert('', 'end', text='Widget Tour', values=(key, value), tags='ttk')
+            self.table.insert('', 'end', values=(key, value), tags='ttk')
 
 
 class Definition(ct.CTkFrame):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
 
-        self.definition = ct.CTkTextbox(self, wrap='word')
+        self.definition = ct.CTkTextbox(self, wrap='word', cursor='')
 
-        ct.CTkLabel(self, text='Definition').grid(row=0, column=0)
+        ct.CTkLabel(self, text='Definition', font=('Arial', 24)).grid(row=0, column=0)
         self.definition.grid(row=1, column=0, sticky='news', padx=10)
 
         self.rowconfigure(0, weight=1)
@@ -97,12 +97,12 @@ class Export(ct.CTkFrame):
         self.max_freq = ct.CTkEntry(self, placeholder_text='10', width=5)
 
         self.export_button = ct.CTkButton(self, text='Export', fg_color='medium orchid', border_color='purple1',
-                                          hover_color='dark orchid', text_color='white', command=self.export)
+                                          hover_color='dark orchid', text_color='white', command=self.export, font=('Arial', 24))
 
-        ct.CTkLabel(self, text='Export words with a frequency between').grid(row=0, column=0, columnspan=3, padx=20,
+        ct.CTkLabel(self, text='Export words with a frequency between', font=('Arial', 24)).grid(row=0, column=0, columnspan=3, padx=20,
                                                                              pady=(20, 10))
         self.min_freq.grid(row=1, column=0, sticky='ew', padx=(30, 10))
-        ct.CTkLabel(self, text='and').grid(row=1, column=1)
+        ct.CTkLabel(self, text='and', font=('Arial', 24)).grid(row=1, column=1)
         self.max_freq.grid(row=1, column=2, sticky='ew', padx=(10, 30))
         self.export_button.grid(row=10, column=0, columnspan=3, pady=(30, 10))
 

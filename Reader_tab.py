@@ -48,7 +48,7 @@ class Word(ct.CTkFrame):
 
         self.word = tk.StringVar(value='word')
         self.word_label = ct.CTkLabel(self, textvariable=self.word, font=('arial', 25), text_color='dark orchid')
-        self.definition = ct.CTkTextbox(self, wrap='word')
+        self.definition = ct.CTkTextbox(self, wrap='word', cursor='')
 
 
         self.word_label.grid(row=0, column=0, padx=10, pady=10)
