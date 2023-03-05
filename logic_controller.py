@@ -5,6 +5,7 @@ import json
 class Model:
     def __init__(self):
         self.word_freq = {}
+        self.load()
 
     def add_freq(self, word):
         if word in self.word_freq.keys():
@@ -48,5 +49,4 @@ class Model:
 model = Model()
 if __name__ == '__main__':
     m = Model()
-    m.load()
     print(m.get_definition('hell'))
