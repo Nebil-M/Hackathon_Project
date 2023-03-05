@@ -19,7 +19,7 @@ class AnalysisTab(ct.CTkFrame):
         self.rowconfigure(1, weight=1)
         self.columnconfigure(0, weight=1)
         self.columnconfigure(1, weight=1)
-        self.configure(fg_color='thistle1')
+        # self.configure(fg_color='powder blue')
 
 
 # This is the table on the left side
@@ -29,8 +29,8 @@ class WordTable(ct.CTkFrame):
 
         style = ttk.Style()
 
-        style.configure('Treeview', fieldbackground='thistle1', rowheight=40)
-        style.configure('Treeview.Heading', background="thistle1", foreground='dark orchid',
+        style.configure('Treeview', fieldbackground='powder blue', rowheight=40)
+        style.configure('Treeview.Heading', background="powder blue", foreground='dark orchid',
                         font=('Helvetica', 20, 'bold'),
                         fieldbackground='#343638')
 
@@ -57,7 +57,7 @@ class WordTable(ct.CTkFrame):
 
         self.rowconfigure(0, weight=1)
         self.columnconfigure(0, weight=1)
-        self.configure(fg_color='thistle1')
+        # self.configure(fg_color='powder blue')
 
         self.load_words()
 
@@ -85,7 +85,7 @@ class Definition(ct.CTkFrame):
         self.rowconfigure(0, weight=1)
         self.rowconfigure(1, weight=1)
         self.columnconfigure(0, weight=1)
-        self.configure(fg_color='thistle1')
+        # self.configure(fg_color='powder blue')
 
 
 # This is the stuff on the right side
@@ -99,7 +99,7 @@ class Export(ct.CTkFrame):
         self.max_freq = ct.CTkEntry(self, placeholder_text='10', width=5)
 
         self.export_button = ct.CTkButton(self, text='Export', fg_color='medium orchid', border_color='purple1',
-                                          hover_color='dark orchid', command=self.export)
+                                          hover_color='dark orchid', text_color='white', command=self.export)
 
         ct.CTkLabel(self, text='Export words with a frequency between').grid(row=0, column=0, columnspan=3, padx=20,
                                                                              pady=(20, 10))
@@ -116,7 +116,7 @@ class Export(ct.CTkFrame):
         self.columnconfigure(1, weight=1)
         self.columnconfigure(2, weight=1)
 
-        self.configure(fg_color='thistle1')
+        # self.configure(fg_color='powder blue')
         self.add_vars()
 
     def add_vars(self):

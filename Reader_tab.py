@@ -17,7 +17,7 @@ class ReaderTab(ct.CTkFrame):
 
         self.word = Word(self)
         self.word.grid(row=0, column=1, sticky='news', padx=10, pady=10)
-        self.configure(fg_color='thistle1')
+        # self.configure(fg_color='thistle1')
 
 
 
@@ -34,7 +34,7 @@ class TextRead(ct.CTkFrame):
 
         self.text.insert("0.0", "first words to be inputted ")
         self.text.insert("end", "second words to be inputted")
-        self.configure(fg_color='thistle1')
+        # self.configure(fg_color='thistle1')
 
 
 # The right side
@@ -53,7 +53,7 @@ class Word(ct.CTkFrame):
 
         self.word_label.grid(row=0, column=0, padx=10, pady=10)
         self.definition.grid(row=1, column=0, sticky='news', padx=10, pady=10)
-        self.configure(fg_color='thistle1')
+        # self.configure(fg_color='thistle1')
 
 
 
