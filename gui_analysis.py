@@ -3,6 +3,7 @@ import customtkinter as ct
 from tkinter import ttk
 from logic_controller import model
 
+
 class AnalysisTab(ct.CTkFrame):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -30,7 +31,7 @@ class WordTable(ct.CTkFrame):
                         fieldbackground='#343638')
 
         self.table = ttk.Treeview(self, columns=('Word', 'Frequency'), displaycolumns='#all',
-                                  selectmode='none', show='headings')
+                                  selectmode='browse', show='headings')
 
         self.table.tag_configure('ttk', font=('Helvetica', 20, 'bold'), foreground='gray74', background='#343638')
 
@@ -55,7 +56,7 @@ class WordTable(ct.CTkFrame):
         self.configure(fg_color='thistle1')
 
         self.load_words()
-        
+
     def load_words(self):
         # sorts it by value
         temp = []
