@@ -15,7 +15,14 @@ class Model:
 
     def get_freq_range(self, minimum, maximum):
         word_list = [word for word in self.word_freq.keys() if minimum <= self.word_freq[word] <= maximum]
-        return word_list
+        print(word_list, "is word_list")
+        open('export.txt', 'w').close()
+        with open('export.txt', 'w') as f:
+            for word in word_list:
+                f.write(word)
+                f.write(', ')
+                f.write(self.get_definition(word))
+                f.write('\t')
 
     def get_definition(self, word):
         s = ''
@@ -45,6 +52,8 @@ class Model:
 
 
 model = Model()
+
+model.get_freq_range(1, 5)
 if __name__ == '__main__':
     m = Model()
     print(m.word_freq)
