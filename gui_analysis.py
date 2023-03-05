@@ -13,7 +13,7 @@ class AnalysisTab(ct.CTkFrame):
         self.definition = Definition(self)
         self.definition.grid(row=0, column=1, sticky='news')
         self.export = Export(self)
-        self.export.grid(row=1, column=1, sticky='news')
+        self.export.grid(row=1, column=1, sticky='news', padx=30, pady=30)
 
         self.rowconfigure(0, weight=1)
         self.rowconfigure(1, weight=1)
@@ -92,7 +92,7 @@ class Export(ct.CTkFrame):
         super().__init__(*args, **kwargs)
 
 
-
+        self.configure(fg_color='gray')
         self.min_freq = ct.CTkEntry(self, placeholder_text='0', width=5)
         self.max_freq = ct.CTkEntry(self, placeholder_text='10', width=5)
 

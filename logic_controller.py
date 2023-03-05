@@ -6,6 +6,7 @@ class Model:
     def __init__(self):
         self.word_freq = {}
         self.load()
+        self.txt = ''
 
     def add_freq(self, word):
         if word in self.word_freq.keys():
@@ -15,13 +16,14 @@ class Model:
 
     def get_freq_range(self, minimum, maximum):
         word_list = [word for word in self.word_freq.keys() if minimum <= self.word_freq[word] <= maximum]
-        open('export.txt', 'w').close()
+
         with open('export.txt', 'w') as f:
             for word in word_list:
                 f.write(word)
-                f.write(', ')
-                f.write(self.get_definition(word))
-                f.write('\t')
+                f.write(' | ')
+                line_def = self.get_definition(word).replace('\n', '')
+                f.write(line_def)
+                f.write('\n')
 
     def get_definition(self, word):
         s = ''
@@ -48,6 +50,12 @@ class Model:
         with open('word_freq.json') as user_file:
             json_object = json.load(user_file)
         self.word_freq = json_object
+
+    def get_text(self, file_dir):
+        with open(file_dir, 'r', encoding="utf-8") as file:
+            text = file.read()
+        self.txt = text
+        return text
 
 
 model = Model()

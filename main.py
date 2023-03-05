@@ -4,6 +4,7 @@ import tkinter as tk
 from Reader_tab import ReaderTab
 from gui_analysis import AnalysisTab
 from logic_controller import model
+from tkinter import filedialog as fd
 
 
 def limited_weight_cells(parent):
@@ -18,6 +19,7 @@ def limited_weight_cells(parent):
 class Controller:
     def __init__(self, view, model):
         self.text = view.reader.text_read.text
+        self.word_view = view.reader.word
         self.word = view.reader.word.word
         self.definition = view.reader.word.definition
 
@@ -30,6 +32,7 @@ class Controller:
         self.text.bind('<ButtonRelease-1>', lambda e: self.select_word(self.text.get('0.0', 'end'), self.text.index(tk.INSERT)))
 
         self.word_table.table.bind('<ButtonRelease-1>', lambda e: self.table_select())
+        self.word_view.import_button.configure(command=lambda : self.open_book())
 
     def select_word(self, string, index):
         cursor = len(self.text.get('0.0', index))
@@ -62,8 +65,14 @@ class Controller:
         self.definition.delete("0.0", 'end')
         self.definition.insert("0.0", model.get_definition(word))
 
+        model.save()
         self.word_table.load_words()
 
+    def open_book(self):
+        filename = fd.askopenfilename()
+        text = model.get_text(filename)
+        self.text.delete("0.0", "end")
+        self.text.insert("end", text)
 
 class App(ct.CTkFrame):
     def __init__(self, *args, **kwargs):
@@ -102,24 +111,14 @@ class App(ct.CTkFrame):
             self.analysis.grid(row=1, column=0, sticky='news', columnspan=2)
 
 
-def select_word(string, cursor):
-    pi = cursor
-    pf = cursor
-    stopers = [' ', ',', '.', '', ]
-    while pi != 0 and string[pi] not in stopers:
-        pi -= 1
-    while pf < len(string) and string[pf] not in stopers:
-        pf += 1
 
-    selected = string[pi:pf + 1]
-    word = ''.join([l for l in selected if l.isalpha()])
-    return word
+
 
 
 if __name__ == '__main__':
     window = ct.CTk()
-    #ct.set_appearance_mode("dark")
-    #ct.set_default_color_theme("dark-blue")
+    ct.set_appearance_mode("dark")
+    ct.set_default_color_theme("dark-blue")
     app = App(window)
     window.title('Language Learning Assistant')
     app.grid(row=0, column=0, sticky='news')

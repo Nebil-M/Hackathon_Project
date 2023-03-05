@@ -9,7 +9,8 @@ class ReaderTab(ct.CTkFrame):
         super().__init__(*args, **kwargs)
         # Layout
         self.rowconfigure(0, weight=1)
-        self.columnconfigure(0, weight=1)
+        self.columnconfigure(0, weight=3)
+        self.columnconfigure(1, weight=1)
 
         # Creating and griding
         self.text_read = TextRead(self)
@@ -45,10 +46,15 @@ class Word(ct.CTkFrame):
         #self.rowconfigure(0, weight=1)
         self.rowconfigure(1, weight=1)
         self.columnconfigure(0, weight=1)
+        self.rowconfigure(2, weight=1)
 
         self.word = tk.StringVar(value='word')
         self.word_label = ct.CTkLabel(self, textvariable=self.word, font=('arial', 25), text_color='dark orchid')
         self.definition = ct.CTkTextbox(self, wrap='word', cursor='')
+        self.import_button = ct.CTkButton(self, text="Import", fg_color='medium orchid', border_color='purple1',
+                                          hover_color='dark orchid', text_color='white', font=('Arial', 24))
+
+        self.import_button.grid(row=2, column=0, padx=40, pady=40, sticky='NEWS')
 
 
         self.word_label.grid(row=0, column=0, padx=10, pady=10)
