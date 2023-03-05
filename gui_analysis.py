@@ -29,15 +29,13 @@ class WordTable(ct.CTkFrame):
 
         style = ttk.Style()
 
-        style.configure('Treeview', fieldbackground='powder blue', rowheight=40)
-        style.configure('Treeview.Heading', background="powder blue", foreground='dark orchid',
-                        font=('Helvetica', 20, 'bold'),
-                        fieldbackground='#343638')
-
+        style.configure('Treeview', rowheight=40)
+        style.configure('Treeview.Heading', foreground='dark orchid',
+                        font=('Helvetica', 20, 'bold'))
         self.table = ttk.Treeview(self, columns=('Word', 'Frequency'), displaycolumns='#all',
                                   selectmode='browse', show='headings')
 
-        self.table.tag_configure('ttk', font=('Helvetica', 20, 'bold'), foreground='gray74', background='#343638')
+        self.table.tag_configure('ttk', font=('Helvetica', 20, 'bold'))
 
         # makes the headings appear
         self.table.heading(0, text='Word')
