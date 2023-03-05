@@ -23,7 +23,7 @@ class Model:
         try:
             definitions = dict[0]['meanings']
         except:
-            "Sorry pals no definitions here."
+            return "Sorry pals no definitions here."
         else:
             for part_of_speech in definitions:
                 s += part_of_speech['partOfSpeech']
@@ -47,13 +47,9 @@ class Model:
 
 if __name__ == '__main__':
     m = Model()
-    #print(m.word_freq)
-    #m.add_freq('non')
-    #m.add_freq('non')
     m.load()
-    print(m.word_freq)
-    print(m.get_definition('good'))
-    #m.save()
+    print(m.get_definition('hell'))
+
 
 
 

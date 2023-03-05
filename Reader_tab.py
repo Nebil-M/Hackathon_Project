@@ -27,8 +27,8 @@ class TextRead(ct.CTkFrame):
         self.rowconfigure(0, weight=1)
         self.columnconfigure(0, weight=1)
 
-        self.text = ct.CTkTextbox(self, wrap='word', padx=30, pady=30)
-        self.text.grid(row=0, column=0, sticky='news', padx=20, pady=10)
+        self.text = ct.CTkTextbox(self, wrap='word')
+        self.text.grid(row=0, column=0, sticky='news')
 
         self.text.insert("0.0", "new text to insert")
 
