@@ -7,9 +7,13 @@ from logic_controller import model
 class AnalysisTab(ct.CTkFrame):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        WordTable(self).grid(row=0, column=0, sticky='news', rowspan=2)
-        Definition(self).grid(row=0, column=1, sticky='news')
-        Export(self).grid(row=1, column=1, sticky='news')
+
+        self.word_table = WordTable(self)
+        self.word_table.grid(row=0, column=0, sticky='news', rowspan=2)
+        self.definition = Definition(self)
+        self.definition.grid(row=0, column=1, sticky='news')
+        self.export = Export(self)
+        self.export.grid(row=1, column=1, sticky='news')
 
         self.rowconfigure(0, weight=1)
         self.rowconfigure(1, weight=1)
@@ -64,7 +68,7 @@ class WordTable(ct.CTkFrame):
             temp.append((key, value))
 
         temp.sort(reverse=True, key=lambda x: x[1])
-
+        self.table.delete(*self.table.get_children())
         for key, value in temp:
             self.table.insert('', 'end', text='Widget Tour', values=(key, value), tags='ttk')
 

@@ -20,12 +20,17 @@ class Controller:
         self.text = view.reader.text_read.text
         self.word = view.reader.word.word
         self.definition = view.reader.word.definition
+
+        self.word_table = view.analysis.word_table
+        self.definition2 = view.analysis.definition.definition
+
         self.bindings()
 
     def bindings(self):
         txt = self.text.get('0.0', 'end')
         self.text.bind('<ButtonRelease-1>', lambda e: self.select_word(txt, self.text.index(tk.INSERT)))
 
+        self.word_table.table.bind('<ButtonRelease-1>', lambda e: self.table_select())
     def select_word(self, string, index):
         cursor = len(self.text.get('0.0', index))
         pi = cursor
@@ -38,14 +43,25 @@ class Controller:
 
         selected = string[pi:pf + 1]
         word = ''.join([l for l in selected if l.isalpha()])
+
+        model.add_freq(word)
         self.update(word)
+
         return word
+
+    def table_select(self):
+        selected_item = self.word_table.table.focus()
+        word = self.word_table.table.item(selected_item)['values'][0]
+        self.definition2.delete("0.0", 'end')
+        self.definition2.insert("0.0", model.get_definition(word))
 
     def update(self, word):
         self.word.set(word)
 
         self.definition.delete("0.0", 'end')
         self.definition.insert("0.0", model.get_definition(word))
+
+        self.word_table.load_words()
 
 
 class App(ct.CTkFrame):
@@ -98,8 +114,8 @@ def select_word(string, cursor):
 
 if __name__ == '__main__':
     window = ct.CTk()
-    ct.set_appearance_mode("dark")
-    ct.set_default_color_theme("dark-blue")
+    #ct.set_appearance_mode("dark")
+    #ct.set_default_color_theme("dark-blue")
     app = App(window)
     app.grid(row=0, column=0, sticky='news')
     window.rowconfigure(0, weight=1)
