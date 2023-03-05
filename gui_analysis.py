@@ -2,15 +2,22 @@ import tkinter as tk
 import customtkinter as ct
 from tkinter import ttk
 
+class AnalysisTab(ct.CTkFrame):
+    WordTable(window)
+    Export(window)
 
+# This is the table on the left side
 class WordTable(ct.CTkFrame):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
 
-        self.table = ttk.Treeview(self, columns=('Word', 'Frequency', 'Definition'), displaycolumns='#all', selectmode='none')
+        self.table = ttk.Treeview(self, columns=('Word', 'Frequency', 'Definition'), displaycolumns='#all',
+                                  selectmode='none')
 
-        self.table.grid(row=0, column=0)
-        self.grid(row=0, column=0)
+        self.table.grid(row=0, column=0, sticky='news')
+
+        self.grid(row=0, column=0, sticky='news')
+
 
 # This is the stuff on the right side
 class Export(ct.CTkFrame):
@@ -31,7 +38,9 @@ class Export(ct.CTkFrame):
 
 
 if __name__ == '__main__':
-    root = ct.CTk()
-    WordTable(root)
-    Export(root)
-    root.mainloop()
+    window = ct.CTk()
+
+
+    window.rowconfigure(0, weight=1)
+    window.columnconfigure(0, weight=1)
+    window.mainloop()
