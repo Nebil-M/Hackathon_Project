@@ -27,10 +27,10 @@ class Controller:
         self.bindings()
 
     def bindings(self):
-        txt = self.text.get('0.0', 'end')
-        self.text.bind('<ButtonRelease-1>', lambda e: self.select_word(txt, self.text.index(tk.INSERT)))
+        self.text.bind('<ButtonRelease-1>', lambda e: self.select_word(self.text.get('0.0', 'end'), self.text.index(tk.INSERT)))
 
         self.word_table.table.bind('<ButtonRelease-1>', lambda e: self.table_select())
+
     def select_word(self, string, index):
         cursor = len(self.text.get('0.0', index))
         pi = cursor
@@ -44,8 +44,9 @@ class Controller:
         selected = string[pi:pf + 1]
         word = ''.join([l for l in selected if l.isalpha()])
 
-        model.add_freq(word)
-        self.update(word)
+        if word and not word.isspace():
+            model.add_freq(word)
+            self.update(word)
 
         return word
 
