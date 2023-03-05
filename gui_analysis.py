@@ -1,7 +1,7 @@
 import tkinter as tk
 import customtkinter as ct
 from tkinter import ttk
-
+from logic_controller import model
 
 class AnalysisTab(ct.CTkFrame):
     def __init__(self, *args, **kwargs):
@@ -14,6 +14,7 @@ class AnalysisTab(ct.CTkFrame):
         self.rowconfigure(1, weight=1)
         self.columnconfigure(0, weight=1)
         self.columnconfigure(1, weight=1)
+        self.configure(fg_color='thistle1')
 
 
 # This is the table on the left side
@@ -23,8 +24,9 @@ class WordTable(ct.CTkFrame):
 
         style = ttk.Style()
 
-        style.configure('Treeview', fieldbackground='#343638', rowheight=40)
-        style.configure('Treeview.Heading', background="#343638", foreground='dark orchid', font=('Helvetica', 20, 'bold'),
+        style.configure('Treeview', fieldbackground='thistle1', rowheight=40)
+        style.configure('Treeview.Heading', background="thistle1", foreground='dark orchid',
+                        font=('Helvetica', 20, 'bold'),
                         fieldbackground='#343638')
 
         self.table = ttk.Treeview(self, columns=('Word', 'Frequency'), displaycolumns='#all',
@@ -36,9 +38,9 @@ class WordTable(ct.CTkFrame):
         # makes the headings appear
         self.table.heading(0, text='Word')
         self.table.heading(1, text='Frequency')
+        # centers the treeview items
         self.table.column(0, anchor='center')
         self.table.column(1, anchor='center')
-
 
         # scrollbars
         self.scroll_x = ct.CTkScrollbar(self, orientation="horizontal", command=self.table.xview)
@@ -51,6 +53,16 @@ class WordTable(ct.CTkFrame):
 
         self.rowconfigure(0, weight=1)
         self.columnconfigure(0, weight=1)
+        self.configure(fg_color='thistle1')
+
+        self.load_words()
+        
+    def load_words(self):
+        print("this ran 1")
+        print((model.word_freq), type(model.word_freq))
+        for key in model.word_freq:
+            print("this ran")
+            print(key, type(key))
 
 
 class Definition(ct.CTkFrame):
@@ -65,8 +77,7 @@ class Definition(ct.CTkFrame):
         self.rowconfigure(0, weight=1)
         self.rowconfigure(1, weight=1)
         self.columnconfigure(0, weight=1)
-
-
+        self.configure(fg_color='thistle1')
 
 
 # This is the stuff on the right side
@@ -76,9 +87,11 @@ class Export(ct.CTkFrame):
 
         self.min_freq = ct.CTkEntry(self, placeholder_text='0', width=5)
         self.max_freq = ct.CTkEntry(self, placeholder_text='10', width=5)
-        self.export_button = ct.CTkButton(self, text='Export', fg_color='medium orchid', border_color='purple1', hover_color='dark orchid')
+        self.export_button = ct.CTkButton(self, text='Export', fg_color='medium orchid', border_color='purple1',
+                                          hover_color='dark orchid')
 
-        ct.CTkLabel(self, text='Export words with a frequency between').grid(row=0, column=0, columnspan=3, padx=20, pady=(20, 10))
+        ct.CTkLabel(self, text='Export words with a frequency between').grid(row=0, column=0, columnspan=3, padx=20,
+                                                                             pady=(20, 10))
         self.min_freq.grid(row=1, column=0, sticky='ew', padx=(30, 10))
         ct.CTkLabel(self, text='and').grid(row=1, column=1)
         self.max_freq.grid(row=1, column=2, sticky='ew', padx=(10, 30))
@@ -91,6 +104,8 @@ class Export(ct.CTkFrame):
         self.columnconfigure(0, weight=1)
         self.columnconfigure(1, weight=1)
         self.columnconfigure(2, weight=1)
+
+        self.configure(fg_color='thistle1')
 
 
 if __name__ == '__main__':
