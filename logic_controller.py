@@ -1,8 +1,8 @@
-
+import json
 
 class Model:
     def __init__(self):
-        self.word_freq = {"rando": 8, "banana": 2, "apple": 4, "fruit": 5}
+        self.word_freq = {}
 
 
     def add_freq(self, word):
@@ -20,18 +20,27 @@ class Model:
         pass
 
     def save(self):
-        pass
+        y = json.dumps(self.word_freq)
+        with open("word_freq.json", "w") as outfile:
+            json.dump(y, outfile)
 
     def load(self):
-        pass
+        with open('word_freq.json') as user_file:
+            file_contents = user_file.read()
+
+
+        self.word_freq = json.loads(file_contents)
+
 
 if __name__ == '__main__':
     m = Model()
+    #print(m.word_freq)
+    #m.add_freq('non')
+    #m.add_freq('non')
+    m.load()
     print(m.word_freq)
-    m.add_freq('non')
-    m.add_freq('non')
-    print(m.word_freq)
-    print(m.get_freq_range(1, 5))
+    #print(m.get_freq_range(1, 5))
+    #m.save()
 
 
 
