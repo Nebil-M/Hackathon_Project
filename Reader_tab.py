@@ -12,11 +12,11 @@ class ReaderTab(ct.CTkFrame):
         self.columnconfigure(0, weight=1)
 
         # Creating and griding
-        text_read = TextRead(self)
-        text_read.grid(row=0, column=0, sticky='news', padx=10, pady=10)
+        self.text_read = TextRead(self)
+        self.text_read.grid(row=0, column=0, sticky='news', padx=10, pady=10)
 
-        word = Word(self)
-        word.grid(row=0, column=1, sticky='news', padx=10, pady=10)
+        self.word = Word(self)
+        self.word.grid(row=0, column=1, sticky='news', padx=10, pady=10)
 
 
 # The left side
@@ -30,7 +30,8 @@ class TextRead(ct.CTkFrame):
         self.text = ct.CTkTextbox(self, wrap='word')
         self.text.grid(row=0, column=0, sticky='news')
 
-        self.text.insert("0.0", "new text to insert")
+        self.text.insert("0.0", "first words to be inputted ")
+        self.text.insert("end", "second words to be inputted")
 
 # The right side
 class Word(ct.CTkFrame):

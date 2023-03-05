@@ -3,7 +3,8 @@ from tkinter import ttk
 import tkinter as tk
 from Reader_tab import ReaderTab
 from gui_analysis import AnalysisTab
-from logic_controller import Model
+from logic_controller import model
+
 
 def limited_weight_cells(parent):
     for child in parent.winfo_children():
@@ -16,19 +17,35 @@ def limited_weight_cells(parent):
 
 class Controller:
     def __init__(self, view, model):
-        self.text = view.reader.text_field.text
-        self.word = view.reader.text_field.word
-        self.definition = view.reader.text_field.definition
+        self.text = view.reader.text_read.text
+        self.word = view.reader.word.word
+        self.definition = view.reader.word.definition
+        self.bindings()
 
     def bindings(self):
-        # vituals
-        pass
+        txt = self.text.get('0.0', 'end')
+        self.text.bind('<ButtonRelease-1>', lambda e: self.select_word(txt, self.text.index(tk.INSERT)))
 
-    def select_word(self):
-        pass
+    def select_word(self, string, index):
+        cursor = len(self.text.get('0.0', index))
+        pi = cursor
+        pf = cursor
+        stopers = [' ', ',', '.', '', '?', '/', '']
+        while pi != 0 and string[pi] not in stopers:
+            pi -= 1
+        while pf < len(string) and string[pf] not in stopers:
+            pf += 1
 
-    def update(self):
-        pass
+        selected = string[pi:pf + 1]
+        word = ''.join([l for l in selected if l.isalpha()])
+        self.update(word)
+        return word
+
+    def update(self, word):
+        self.word.set(word)
+
+        self.definition.delete("0.0", 'end')
+        self.definition.insert("0.0", model.get_definition(word))
 
 
 class App(ct.CTkFrame):
@@ -65,12 +82,28 @@ class App(ct.CTkFrame):
             self.analysis.grid(row=1, column=0, sticky='news', columnspan=2)
 
 
+def select_word(string, cursor):
+    pi = cursor
+    pf = cursor
+    stopers = [' ', ',', '.', '', ]
+    while pi != 0 and string[pi] not in stopers:
+        pi -= 1
+    while pf < len(string) and string[pf] not in stopers:
+        pf += 1
+
+    selected = string[pi:pf + 1]
+    word = ''.join([l for l in selected if l.isalpha()])
+    return word
+
+
 if __name__ == '__main__':
     window = ct.CTk()
     ct.set_appearance_mode("dark")
     ct.set_default_color_theme("dark-blue")
-    App(window).grid(row=0, column=0, sticky='news')
+    app = App(window)
+    app.grid(row=0, column=0, sticky='news')
     window.rowconfigure(0, weight=1)
     window.columnconfigure(0, weight=1)
+    c = Controller(app, model)
 
     window.mainloop()
