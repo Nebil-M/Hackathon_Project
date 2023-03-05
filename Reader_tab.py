@@ -11,10 +11,10 @@ class ReaderTab(ct.CTkFrame):
 
         # Creating and griding
         text_read = TextRead(self)
-        text_read.grid(row=0, column=0)
+        text_read.grid(row=0, column=0, sticky='news')
 
         word = Word(self)
-        word.grid(row=0, column=1)
+        word.grid(row=0, column=1, sticky='news')
 
 
 # The left side
@@ -24,7 +24,8 @@ class TextRead(ct.CTkFrame):
 
         self.text = ct.CTkTextbox(self, wrap='word')
 
-        self.text.grid(row=0, column=0)
+        self.text.grid(row=0, column=0, sticky='news')
+
 
 # The right side
 class Word(ct.CTkFrame):
@@ -36,7 +37,7 @@ class Word(ct.CTkFrame):
         self.definition = ct.CTkTextbox(self, wrap='word')
 
         self.word_label.grid(row=0, column=0)
-        self.definition.grid(row=1, column=0)
+        self.definition.grid(row=1, column=0, sticky='ews')
 
 
 if __name__ == "__main__":
