@@ -1,3 +1,4 @@
+import requests
 import json
 
 class Model:
@@ -15,9 +16,22 @@ class Model:
         word_list = [word for word in self.word_freq.keys() if minimum <= self.word_freq[word] <= maximum]
         return word_list
 
-
-    def get_definition(self):
-        pass
+    def get_definition(self, word):
+        s = ''
+        response = requests.get(f'https://api.dictionaryapi.dev/api/v2/entries/en/{word}')
+        dict = response.json()
+        try:
+            definitions = dict[0]['meanings']
+        except:
+            "Sorry pals no definitions here."
+        else:
+            for part_of_speech in definitions:
+                s += part_of_speech['partOfSpeech']
+                s += '\n---\n'
+                defs = '\n'.join([defs['definition'] for defs in part_of_speech['definitions']])
+                s += defs
+                s += '\n------------------------------------------\n'
+            return s
 
     def save(self):
         y = json.dumps(self.word_freq)
@@ -27,7 +41,6 @@ class Model:
     def load(self):
         with open('word_freq.json') as user_file:
             file_contents = user_file.read()
-
 
         self.word_freq = json.loads(file_contents)
 
@@ -39,7 +52,7 @@ if __name__ == '__main__':
     #m.add_freq('non')
     m.load()
     print(m.word_freq)
-    #print(m.get_freq_range(1, 5))
+    print(m.get_definition('good'))
     #m.save()
 
 
